@@ -5,12 +5,10 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Odin Project: Rock, Paper, Scissors - Prompt/Console Based </title>
 </head>
 
 <body>
-
-
 
 
    <script>
@@ -27,10 +25,6 @@
       }
       computerPlay();
 
-
-
-
-
       // 4.  Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters - the
       // playerSelection and computerSelection - and then return a string that declares the winner of the round like so: "You
       // Lose! Paper beats Rock"
@@ -42,76 +36,81 @@
       // function playRound(playerSelection, computerSelection) {
       // // your code here!
       // }
-
+      let playerWon, pcWon;
       function playRound(playerSelection, computerSelection) {
          // your code here!
          if (playerSelection === computerSelection) {
+            pcWon = false;
+            playerWon = false;
+            return `It a tie round, Player selected ${playerSelection} while Computer also selected ${computerSelection}`;
 
-            return "Match Tied, You may need to play again";
 
          } else if (playerSelection === "scissor" && computerSelection === "paper") {
-            return "Player won with scissor beating paper";
-            // pS = pS + 1;
+            pcWon = false;
+            playerWon = true;
+            return `Player won this round with ${playerSelection} beating ${computerSelection}`;
+
          } else if (playerSelection === "scissor" && computerSelection === "rock") {
-            return "Computer won with rock beating scissor";
-            // cS = cS + 1;
+            pcWon = true;
+            playerWon = false;
+            return `Computer won this round with ${computerSelection} beating ${playerSelection}`;
          } else if (playerSelection === "rock" && computerSelection === "paper") {
-            return "Computer won with paper beating rock";
-            // cS = cS + 1;
+            pcWon = true;
+            playerWon = false;
+            return `Computer won this round with ${computerSelection} beating ${playerSelection}`;
          } else if (playerSelection === "rock" && computerSelection === "scissor") {
-            return "Player won with rock beating scissor";
-            // pS = pS + 1;
+            pcWon = false;
+            playerWon = true;
+            return `Player won this round with ${playerSelection} beating ${computerSelection}`;
 
          } else if (playerSelection === "paper" && computerSelection === "scissor") {
-            return "Computer won with scissor beating paper";
-            // cS = cS + 1;
+            pcWon = true;
+            playerWon = false;
+            return `Computer won this round with ${computerSelection} beating ${playerSelection}`;
          }
          else if (playerSelection === "paper" && computerSelection === "rock") {
-            return "Player won with paper beating rock";
-            // pS = pS + 1;
+            pcWon = false;
+            playerWon = true;
+            return `Player won this round with ${playerSelection} beating ${computerSelection}`;
 
          } else {
-            return "A different decision need to be specified";
+            return "Wrong entry";
          }
-
-
-
       }
       // const playerSelection = "rock";
       // const computerSelection = computerPlay();
       // console.log(playRound(playerSelection, computerSelection));
 
-      const playerSelection = prompt("Rock, Paper or Scissor?");
+      const playerSelection = "rock";
       const computerSelection = computerPlay();
 
-      let pS;
-      let cS;
-
-      console.log(playRound(playerSelection, computerSelection));
-
-
-
-
-
-
-
       // Write a NEW function called game(). 
+      let playerScore = 0, pcScore = 0;
       function game() {
-         // Call the playRound function inside of this one to play a 5 round game that keeps
-         // score and reports a winner or loser at the end.
-         // Remember loops? This is a great opportunity to use one to play those five rounds:
+         for (i = 1; i <= 5; i++) { // 5 rounds
+            //  Use prompt() to get input from the user. Read the docs here if you
+            //    need to. Feel free to re-work your previous functions if you need to. Specifically, you might want to change the
+            //    return value to something more useful. Feel free to create more “helper” functions if you think it would be useful.
+            console.log(playRound(prompt("Rock, paper or scissors?").toLowerCase(), computerPlay()));
+            if (playerWon) {
+               playerScore++;
+            } else if (pcWon) {
+               pcScore++;
+            }
+            //if they're both false it's a draw, neither gets a point 
 
-         // for (let i = 0; i < 5; i++) { // your code here! } At this point you should be using console.log() to display the
-         //    results of each round and the winner at the end.
-         playRound();
+         }
 
+         console.log(`You won ${playerScore} rounds, whereas the computer won ${pcScore}. There were ${5 - playerScore - pcScore} ties.`)
+         if (playerScore > pcScore) {
+            console.log("You won the Match!, Computer Lost.");
+         } else if (playerScore < pcScore) {
+            console.log("You Lost the Match!, Computer wins.");
+         } else {
+            console.log("Its a tie Overall, Match Draw!");
+         }
       }
       game();
-
-//  Use prompt() to get input from the user. Read the docs here if you
-//    need to. Feel free to re-work your previous functions if you need to. Specifically, you might want to change the
-//    return value to something more useful. Feel free to create more “helper” functions if you think it would be useful.
-
    </script>
 </body>
 
